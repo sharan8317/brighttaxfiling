@@ -1,8 +1,54 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import WhatsAppIcon from '../components/WhatsAppIcon'
+
+const heroSlides = [
+  {
+    image: '/images/tax-board-meeting-v2.webp',
+    alt: 'A tax advisor presenting filing documents during a boardroom meeting',
+    label: 'Individual tax preparation',
+    title: 'Every return gets a professional review.',
+    copy: 'Form 1040 preparation for employees, contractors, investors, and property owners.',
+  },
+  {
+    image: '/images/international-tax-meeting-v2.webp',
+    alt: 'Clients and a tax specialist reviewing international filing documents in a meeting room',
+    label: 'Nonresident and ITIN filing',
+    title: 'Complex residency rules, handled clearly.',
+    copy: 'Support for Form 1040-NR, treaty positions, dual-status returns, and Form W-7.',
+  },
+  {
+    image: '/images/business-tax-boardroom-v2.webp',
+    alt: 'Business leaders reviewing corporate tax records with an advisor around a conference table',
+    label: 'Business tax returns',
+    title: 'Business filings built around your entity.',
+    copy: 'Preparation for LLCs, partnerships, S corporations, and C corporations.',
+  },
+]
 
 export default function Home() {
   const [openFaq, setOpenFaq] = useState(0)
+  const [activeSlide, setActiveSlide] = useState(0)
+  const [isCarouselPaused, setIsCarouselPaused] = useState(false)
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reducedMotion || isCarouselPaused) return undefined
+
+    const interval = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % heroSlides.length)
+    }, 3000)
+
+    return () => window.clearInterval(interval)
+  }, [isCarouselPaused])
+
+  const showPreviousSlide = () => {
+    setActiveSlide((current) => (current - 1 + heroSlides.length) % heroSlides.length)
+  }
+
+  const showNextSlide = () => {
+    setActiveSlide((current) => (current + 1) % heroSlides.length)
+  }
 
   const faqs = [
     {
@@ -15,7 +61,7 @@ export default function Home() {
     },
     {
       q: "Can I obtain an ITIN without mailing my original physical passport?",
-      a: "Yes! As an authorized IRS Certifying Acceptance Agent (CAA), Bright Tax Filings has legal authorization from the IRS to examine, certify, and attest to your foreign identity and citizenship documents. We verify your passport in person or via verified CAA protocol and submit Form W-7 with our Certificate of Accuracy (Form W-7 COA), so your physical passport never leaves your hands."
+      a: "Yes! As an authorized IRS Certifying Acceptance Agent (CAA), Bright Tax Filing has legal authorization from the IRS to examine, certify, and attest to your foreign identity and citizenship documents. We verify your passport in person or via verified CAA protocol and submit Form W-7 with our Certificate of Accuracy (Form W-7 COA), so your physical passport never leaves your hands."
     },
     {
       q: "Does filing a tax extension give me more time to pay my taxes?",
@@ -31,14 +77,57 @@ export default function Home() {
     <div className="flex flex-col w-full">
       
       {/* HERO SECTION */}
-      <section className="relative w-full bg-gradient-to-b from-surface-card via-surface to-surface-canvas overflow-hidden pt-8 pb-20 lg:pt-14 lg:pb-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
-            
-            {/* Hero Text Content */}
-            <div className="lg:col-span-6 flex flex-col items-start space-y-space-md">
+      <section
+        className="hero-background"
+        onMouseEnter={() => setIsCarouselPaused(true)}
+        onMouseLeave={() => setIsCarouselPaused(false)}
+        onFocusCapture={() => setIsCarouselPaused(true)}
+        onBlurCapture={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget)) setIsCarouselPaused(false)
+        }}
+      >
+        <div className="hero-carousel hero-carousel--background" aria-roledescription="carousel" aria-label="Bright Tax Filing services">
+          <div className="hero-carousel__media">
+            {heroSlides.map((slide, index) => (
+              <img
+                key={slide.image}
+                src={slide.image}
+                alt={slide.alt}
+                className={`hero-carousel__image ${index === activeSlide ? 'is-active' : ''}`}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                fetchPriority={index === 0 ? 'high' : 'auto'}
+                aria-hidden={index === activeSlide ? undefined : true}
+              />
+            ))}
+            <div className="hero-carousel__shade" aria-hidden="true" />
+          </div>
+
+          <div className="hero-carousel__controls">
+            <button type="button" onClick={showPreviousSlide} aria-label="Show previous slide">
+              <span className="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+            </button>
+            <div className="hero-carousel__dots" aria-label="Choose a slide">
+              {heroSlides.map((slide, index) => (
+                <button
+                  type="button"
+                  key={slide.label}
+                  className={index === activeSlide ? 'is-active' : ''}
+                  onClick={() => setActiveSlide(index)}
+                  aria-label={`Show ${slide.label}`}
+                  aria-current={index === activeSlide ? 'true' : undefined}
+                />
+              ))}
+            </div>
+            <button type="button" onClick={showNextSlide} aria-label="Show next slide">
+              <span className="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+            </button>
+          </div>
+        </div>
+
+        <div className="hero-background__inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="hero-background__content flex flex-col items-start space-y-space-md">
               {/* Authority Eyebrow */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high text-primary">
+              <div className="hero-authority inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high text-primary">
                 <span className="material-symbols-outlined text-secondary text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
                   verified_user
                 </span>
@@ -60,7 +149,7 @@ export default function Home() {
               {/* CTAs */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm w-full sm:w-auto pt-2">
                 <Link
-                  to="/book-a-consultation"
+                  to="/contact-us"
                   className="bg-secondary hover:bg-secondary-container text-on-secondary px-6 py-3.5 rounded-lg font-label-md text-label-md font-semibold transition-all duration-150 shadow-md hover:shadow-lg inline-flex items-center justify-center gap-2 group"
                 >
                   <span>Get Started</span>
@@ -71,7 +160,7 @@ export default function Home() {
 
                 <a
                   href="#services-matrix"
-                  className="bg-surface-card hover:bg-surface-container-low text-primary px-6 py-3.5 rounded-lg font-label-md text-label-md font-semibold transition-all duration-150 shadow-sm inline-flex items-center justify-center gap-2 border border-border-subtle"
+                  className="hero-secondary-action bg-surface-card hover:bg-surface-container-low text-primary px-6 py-3.5 rounded-lg font-label-md text-label-md font-semibold transition-all duration-150 shadow-sm inline-flex items-center justify-center gap-2 border border-border-subtle"
                 >
                   <span>Explore Our Services</span>
                   <span className="material-symbols-outlined text-base text-on-surface-variant">
@@ -82,7 +171,7 @@ export default function Home() {
 
               {/* Trust Badges Line */}
               <div className="pt-6 w-full">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 bg-surface-container-low/60 p-4 rounded-xl border border-border-subtle/50">
+                <div className="hero-trust grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 bg-surface-container-low/60 p-4 rounded-xl border border-border-subtle/50">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-full bg-irs-verified/10 text-irs-verified flex items-center justify-center flex-shrink-0">
                       <span className="material-symbols-outlined text-lg">check_circle</span>
@@ -115,129 +204,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-
-            {/* Hero Visual Composition */}
-            <div className="lg:col-span-6 relative">
-              {/* Ambient Glow Backdrop */}
-              <div className="absolute -top-12 -right-8 w-80 h-80 bg-secondary/10 rounded-full blur-3xl pointer-events-none"></div>
-              <div className="absolute -bottom-8 -left-8 w-72 h-72 bg-tertiary-fixed-dim/30 rounded-full blur-2xl pointer-events-none"></div>
-
-              {/* Main Interactive Dashboard Container */}
-              <div className="relative bg-surface-card rounded-2xl shadow-[0_20px_40px_-15px_rgba(16,42,67,0.12)] p-space-lg space-y-space-md border border-border-subtle">
-                {/* Lead Bar: Status & Shield */}
-                <div className="flex items-center justify-between pb-3 bg-surface-container-low/50 px-4 py-3 rounded-xl">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-surface-card shadow-sm">
-                      <span className="material-symbols-outlined text-xl text-secondary-fixed">shield</span>
-                    </div>
-                    <div>
-                      <div className="font-label-md text-label-md text-primary font-bold">Federal Form 1040 Optimized</div>
-                      <div className="font-body-sm text-body-sm text-irs-verified font-medium flex items-center gap-1">
-                        <span className="material-symbols-outlined text-sm">task_alt</span> Certified Acceptance Review Complete
-                      </div>
-                    </div>
-                  </div>
-                  <span className="px-2.5 py-1 rounded bg-secondary-fixed text-on-secondary-fixed font-mono-financial text-mono-financial text-xs font-semibold uppercase tracking-wider">
-                    TY2024
-                  </span>
-                </div>
-
-                {/* Asymmetric Bento Display within Dashboard */}
-                <div className="grid grid-cols-1 sm:grid-cols-12 gap-space-sm">
-                  {/* Left Stack: Financial Metrics Breakdown */}
-                  <div className="sm:col-span-7 bg-surface-canvas rounded-xl p-space-md flex flex-col justify-between space-y-3 border border-border-subtle/40">
-                    <div className="flex items-center justify-between">
-                      <span className="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">
-                        Tax Liability Delta
-                      </span>
-                      <span className="text-irs-verified font-mono-financial text-mono-financial text-xs font-semibold px-2 py-0.5 rounded bg-irs-verified/10">
-                        -24.8%
-                      </span>
-                    </div>
-                    <div>
-                      <div className="font-label-sm text-label-sm text-on-surface-variant">Tax Savings Leveraged</div>
-                      <div className="font-headline-md text-headline-md text-primary font-bold tracking-tight font-mono-financial">
-                        $18,450.00
-                      </div>
-                    </div>
-
-                    {/* Sparkline & Distribution Visual */}
-                    <div className="pt-2">
-                      <div className="flex justify-between text-body-sm font-mono-financial text-outline text-xs mb-1">
-                        <span>Q1 Structuring</span>
-                        <span className="text-secondary font-semibold">Credits Applied</span>
-                      </div>
-                      <div className="h-2 w-full bg-surface-container-high rounded-full overflow-hidden flex">
-                        <div className="h-full bg-secondary w-3/5 rounded-l-full"></div>
-                        <div className="h-full bg-irs-verified w-1/4"></div>
-                        <div className="h-full bg-primary w-3/20 rounded-r-full"></div>
-                      </div>
-                      <div className="flex items-center gap-3 pt-2 text-xs font-body-sm text-on-surface-variant">
-                        <span className="flex items-center gap-1">
-                          <span className="w-2 h-2 rounded-full bg-secondary inline-block"></span> §199A QBI
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <span className="w-2 h-2 rounded-full bg-irs-verified inline-block"></span> Child/Dep
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <span className="w-2 h-2 rounded-full bg-primary inline-block"></span> FTC
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Right Stack: Senior CPA Advisor Card */}
-                  <div className="sm:col-span-5 bg-primary text-on-primary rounded-xl p-space-md flex flex-col justify-between">
-                    <div className="flex items-center justify-between">
-                      <span className="font-label-sm text-label-sm text-primary-fixed uppercase tracking-wider font-semibold text-[11px]">
-                        Lead Tax Director
-                      </span>
-                      <span className="material-symbols-outlined text-primary-fixed-dim text-lg">verified</span>
-                    </div>
-                    
-                    <div className="my-2 flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-full bg-primary-container border-2 border-secondary-fixed flex items-center justify-center text-white font-bold text-lg font-mono-financial">
-                        MV
-                      </div>
-                      <div className="min-w-0">
-                        <div className="font-title-md text-title-md text-surface-card font-bold truncate">Marcus Vance</div>
-                        <div className="font-body-sm text-body-sm text-primary-fixed-dim truncate">CPA, Enrolled Agent</div>
-                      </div>
-                    </div>
-
-                    <div className="pt-2 bg-primary-container p-2.5 rounded-lg">
-                      <div className="font-label-sm text-label-sm text-primary-fixed flex items-center gap-1">
-                        <span className="w-2 h-2 rounded-full bg-irs-verified inline-block animate-pulse"></span>
-                        <span>Ready for Filing</span>
-                      </div>
-                      <div className="font-body-sm text-body-sm text-surface-variant/80 text-xs mt-0.5 truncate">
-                        Zero Discrepancies Verified
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Document Pipeline Indicator */}
-                <div className="bg-surface-container-low rounded-xl p-space-md flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-secondary-fixed text-primary flex items-center justify-center font-bold font-mono-financial text-xs">
-                      04
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="font-label-md text-label-md text-primary font-semibold">Pre-Submission Quality Audit</span>
-                      <span className="font-body-sm text-body-sm text-outline">Federal e-File Channel Secure Ready</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-1 text-irs-verified font-label-sm text-label-sm font-semibold bg-surface-card px-2.5 py-1 rounded shadow-sm">
-                    <span className="material-symbols-outlined text-sm">lock_clock</span>
-                    <span>Audit Defense Included</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
           </div>
-        </div>
       </section>
 
       {/* TRUST STATS / METRICS STRIP */}
@@ -248,7 +215,7 @@ export default function Home() {
               <div className="w-10 h-10 rounded-full bg-secondary/20 text-secondary-fixed flex items-center justify-center mb-2">
                 <span className="material-symbols-outlined">schedule</span>
               </div>
-              <span className="font-display-lg text-display-lg font-bold text-surface-card tracking-tight font-mono-financial">15+</span>
+              <span className="font-display-lg text-display-lg font-bold text-surface-card tracking-tight font-mono-financial">11+</span>
               <span className="font-label-md text-label-md text-primary-fixed font-semibold mt-1">Years of Tax Experience</span>
               <span className="font-body-sm text-body-sm text-primary-fixed-dim/80 mt-1">Continuous regulatory mastery</span>
             </div>
@@ -418,7 +385,7 @@ export default function Home() {
               </div>
               <div className="pt-6 mt-4">
                 <Link
-                  to="/book-a-consultation"
+                  to="/contact-us"
                   className="inline-flex items-center gap-1.5 font-label-md text-label-md text-secondary group-hover:text-secondary-container font-semibold"
                 >
                   <span>Learn More</span>
@@ -514,10 +481,10 @@ export default function Home() {
               Built On Absolute Institutional Trust
             </span>
             <h2 className="font-headline-lg text-headline-lg text-surface-card font-bold tracking-tight">
-              Why Discerning Individuals &amp; Businesses Trust Bright Tax Filings
+              Why Discerning Individuals &amp; Businesses Trust Bright Tax Filing
             </h2>
             <p className="font-body-lg text-body-lg text-primary-fixed-dim mt-2">
-              Unlike commoditized automated software, every single return at Bright Tax Filings receives bespoke scrutiny from credentialed Enrolled Agents and CPAs.
+              Unlike commoditized automated software, every single return at Bright Tax Filing receives bespoke scrutiny from credentialed Enrolled Agents and CPAs.
             </p>
           </div>
 
@@ -573,7 +540,7 @@ export default function Home() {
               Streamlined 4-Step Process
             </span>
             <h2 className="font-headline-lg text-headline-lg text-primary font-bold tracking-tight">
-              How Filing With Bright Tax Filings Works
+              How Filing With Bright Tax Filing Works
             </h2>
             <p className="font-body-lg text-body-lg text-on-surface-variant mt-2">
               A transparent, frictionless workflow designed to take you from unorganized documents to IRS-accepted peace of mind.
@@ -692,7 +659,7 @@ export default function Home() {
                   ))}
                 </div>
                 <p className="font-body-md text-body-md text-on-surface-variant italic mb-6">
-                  &ldquo;As a nonresident founder operating a Delaware C-Corp with international shareholders, our tax compliance was a nightmare. Bright Tax Filings reconciled our Form 1120 and 5472 disclosures with complete transparency and zero stress.&rdquo;
+                  &ldquo;As a nonresident founder operating a Delaware C-Corp with international shareholders, our tax compliance was a nightmare. Bright Tax Filing reconciled our Form 1120 and 5472 disclosures with complete transparency and zero stress.&rdquo;
                 </p>
               </div>
               <div className="flex items-center gap-3 pt-4 bg-surface-container-low/40 p-3 rounded-lg border border-border-subtle/50">
@@ -740,7 +707,7 @@ export default function Home() {
                   ))}
                 </div>
                 <p className="font-body-md text-body-md text-on-surface-variant italic mb-6">
-                  &ldquo;Bright Tax Filings resolved an alarming IRS CP2000 proposed notice for alleged underreported capital gains. Their audit team prepared an airtight response that reduced the IRS assessment from $16,800 to exactly $0 with complete penalty abatement.&rdquo;
+                  &ldquo;Bright Tax Filing resolved an alarming IRS CP2000 proposed notice for alleged underreported capital gains. Their audit team prepared an airtight response that reduced the IRS assessment from $16,800 to exactly $0 with complete penalty abatement.&rdquo;
                 </p>
               </div>
               <div className="flex items-center gap-3 pt-4 bg-surface-container-low/40 p-3 rounded-lg border border-border-subtle/50">
@@ -820,21 +787,32 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-space-sm">
             <Link
-              to="/book-a-consultation"
+              to="/contact-us"
               className="w-full sm:w-auto bg-secondary hover:bg-secondary-container text-on-secondary px-8 py-4 rounded-lg font-title-md text-title-md font-semibold transition-all duration-150 shadow-lg hover:shadow-xl inline-flex items-center justify-center gap-2 group"
             >
-              <span>Schedule a Consultation</span>
+              <span>Contact Our Tax Team</span>
               <span className="material-symbols-outlined text-lg transition-transform group-hover:translate-x-1">
                 calendar_today
               </span>
             </Link>
 
             <a
-              href="tel:18005552739"
+              href="tel:+12135273378"
               className="w-full sm:w-auto bg-primary-container/80 hover:bg-primary/80 text-surface-card px-6 py-4 rounded-lg font-title-md text-title-md font-semibold transition-all duration-150 inline-flex items-center justify-center gap-2 font-mono-financial border border-primary-fixed-dim/20"
             >
               <span className="material-symbols-outlined text-secondary-fixed">phone</span>
-              <span>+1 (800) 555-APEX</span>
+              <span>+1 (213) 527-3378</span>
+            </a>
+
+            <a
+              href="https://wa.me/916301999637"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto bg-[#25D366] hover:bg-[#1fa855] text-white px-6 py-4 rounded-lg font-title-md text-title-md font-semibold transition-all duration-150 inline-flex items-center justify-center gap-2 font-mono-financial shadow-lg"
+              aria-label="Chat on WhatsApp at +91 63019 99637"
+            >
+              <WhatsAppIcon />
+              <span>+91 63019 99637</span>
             </a>
           </div>
 

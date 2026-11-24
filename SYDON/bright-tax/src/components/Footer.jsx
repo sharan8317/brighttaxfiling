@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import WhatsAppIcon from './WhatsAppIcon'
 
 export default function Footer() {
   return (
@@ -11,11 +12,17 @@ export default function Footer() {
           {/* Brand & Credential Statement */}
           <div className="lg:col-span-4 flex flex-col gap-space-md">
             <Link to="/" className="flex items-center gap-space-sm group">
-              <div className="w-9 h-9 rounded-lg bg-surface-card flex items-center justify-center text-primary shadow">
-                <span className="material-symbols-outlined text-xl text-secondary">account_balance</span>
-              </div>
+              <span className="relative block h-12 w-14 flex-shrink-0 overflow-hidden" aria-hidden="true">
+                <img
+                  src="/images/bright-tax-filing-logo.png"
+                  alt=""
+                  className="max-w-none -translate-x-[23px] object-contain"
+                  width="102"
+                  height="68"
+                />
+              </span>
               <span className="font-headline-sm text-headline-sm text-surface-card tracking-tight font-bold group-hover:text-secondary-fixed transition-colors">
-                Bright Tax Filings
+                Bright Tax <span className="text-sky-400">Filing</span>
               </span>
             </Link>
 
@@ -50,11 +57,6 @@ export default function Footer() {
               <li>
                 <Link to="/about-us" className="hover:text-surface-card transition-colors">
                   About Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/book-a-consultation" className="hover:text-surface-card transition-colors">
-                  Book a Consultation
                 </Link>
               </li>
               <li>
@@ -111,7 +113,7 @@ export default function Footer() {
             </span>
             <ul className="flex flex-col gap-2 font-body-sm text-body-sm text-on-primary-container">
               <li>
-                <Link to="/book-a-consultation" className="hover:text-surface-card transition-colors">
+                <Link to="/contact-us" className="hover:text-surface-card transition-colors">
                   Strategic Tax Planning
                 </Link>
               </li>
@@ -140,35 +142,43 @@ export default function Footer() {
         </div>
 
         {/* Office & Operations Strip */}
-        <div className="py-space-md border-t border-primary/40 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md text-on-primary-container font-body-sm text-body-sm">
+        <div className="py-space-md border-t border-primary/40 grid grid-cols-1 md:grid-cols-3 gap-space-md text-on-primary-container font-body-sm text-body-sm">
           <div>
             <span className="font-label-sm text-label-sm uppercase tracking-wider text-surface-variant block mb-1">
               US Headquarters
             </span>
-            <p>14 Wall Street, 22nd Floor<br />New York, NY 10005</p>
-          </div>
-          <div>
-            <span className="font-label-sm text-label-sm uppercase tracking-wider text-surface-variant block mb-1">
-              Capital Office
-            </span>
-            <p>1101 Pennsylvania Ave NW<br />Washington, DC 20004</p>
+            <p>580 California Street, Financial District<br />San Francisco, CA 94104, United States</p>
           </div>
           <div>
             <span className="font-label-sm text-label-sm uppercase tracking-wider text-surface-variant block mb-1">
               Direct Communications
             </span>
-            <p className="font-mono-financial text-mono-financial">
-              P: +1 (800) 555-APEX<br />
-              E: inquiries@brighttaxfilings.com
-            </p>
+            <div className="flex flex-col items-start gap-1 font-mono-financial text-mono-financial">
+              <a href="tel:+12135273378" className="hover:text-surface-card transition-colors">
+                P: +1 (213) 527-3378
+              </a>
+              <a
+                href="https://wa.me/916301999637"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 hover:text-surface-card transition-colors"
+                aria-label="Chat on WhatsApp at +91 63019 99637"
+              >
+                <WhatsAppIcon className="h-4 w-4" />
+                <span>+91 63019 99637</span>
+              </a>
+              <a href="mailto:contact@brighttaxfiling.com" className="hover:text-surface-card transition-colors">
+                E: contact@brighttaxfiling.com
+              </a>
+            </div>
           </div>
           <div>
             <span className="font-label-sm text-label-sm uppercase tracking-wider text-surface-variant block mb-1">
               Client Operating Hours
             </span>
             <p>
-              Mon - Fri: 8:00 AM - 8:00 PM EST<br />
-              Saturday: 9:00 AM - 4:00 PM EST
+              Mon - Fri: 8:00 AM - 8:00 PM PST<br />
+              Saturday: 9:00 AM - 4:00 PM PST
             </p>
           </div>
         </div>
@@ -176,7 +186,7 @@ export default function Footer() {
         {/* Legal & Compliance Footer */}
         <div className="pt-space-lg mt-space-md border-t border-primary/40 flex flex-col md:flex-row items-center justify-between gap-space-md font-body-sm text-body-sm text-on-primary-container">
           <div className="flex flex-col md:flex-row md:items-center gap-space-xs md:gap-space-md text-center md:text-left">
-            <span>&copy; {new Date().getFullYear()} Bright Tax Filings LLC. All rights reserved.</span>
+            <span>&copy; {new Date().getFullYear()} Bright Tax Filing LLC. All rights reserved.</span>
             <span className="hidden md:inline">&bull;</span>
             <span className="text-surface-variant">Circular 230 Disclosure &amp; Authorized IRS e-File Provider</span>
           </div>

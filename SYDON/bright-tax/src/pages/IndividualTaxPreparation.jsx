@@ -50,7 +50,7 @@ export default function IndividualTaxPreparation() {
 
               <div className="flex flex-wrap items-center gap-space-md pt-space-xs">
                 <Link
-                  to="/book-a-consultation"
+                  to="/contact-us"
                   className="bg-secondary hover:bg-secondary-container text-on-secondary px-6 py-3 rounded-lg font-label-md text-label-md transition-all shadow-md hover:shadow-lg inline-flex items-center gap-2 font-semibold"
                 >
                   <span>Start Individual Tax Filing</span>
@@ -156,7 +156,7 @@ export default function IndividualTaxPreparation() {
                 More Than Just Entering Numbers in Boxes
               </h2>
               <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-                Individual tax preparation is the comprehensive legal and financial synthesis of your entire calendar year. At Bright Tax Filings, we don’t merely transfer numbers onto Form 1040—we cross-examine complex tax code regulations to minimize your ongoing federal and multi-state tax liabilities while shielding you from punitive IRS audits.
+                Individual tax preparation is the comprehensive legal and financial synthesis of your entire calendar year. At Bright Tax Filing, we don’t merely transfer numbers onto Form 1040—we cross-examine complex tax code regulations to minimize your ongoing federal and multi-state tax liabilities while shielding you from punitive IRS audits.
               </p>
               
               <div className="space-y-space-sm pt-space-xs">
@@ -494,10 +494,10 @@ export default function IndividualTaxPreparation() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              to="/book-a-consultation"
+              to="/contact-us"
               className="bg-secondary hover:bg-secondary-container text-on-secondary px-8 py-3.5 rounded-lg font-semibold shadow-md transition-all inline-flex items-center gap-2"
             >
-              <span>Book Individual Consultation</span>
+              <span>Contact an Individual Tax Specialist</span>
               <span className="material-symbols-outlined text-sm">calendar_today</span>
             </Link>
             <Link

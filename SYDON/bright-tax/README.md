@@ -18,7 +18,6 @@ The application is structured into 7 distinct, fully-realized pages following th
 | `/nonresident-tax-filing` | **Nonresident Tax Filing** | Interactive Substantial Presence Test (SPT) visualizer, 1040 vs. 1040-NR comparison matrix, CAA ITIN (Form W-7) certification protocols, FBAR/FATCA guidance, and visa-specific advice (F-1, J-1, H-1B, L-1, EB-5). | `0d9f96d977c1486ba6b3662eb2475072` |
 | `/business-tax-services` | **Business Tax Services** | Bento grid breakdown for LLCs (1065), S-Corps (1120-S), and C-Corps (1120), safe-harbor quarterly estimated tax rules, Section 179 and 199A deduction optimization, and entity election guidance. | `fc9cd6d5c99742088e9466ef6885bea1` |
 | `/contact-us` | **Contact Us** | Interactive multi-priority dispatch form (Standard vs. Urgent IRS Notice), secure file upload dropzone simulation, physical office cards (NYC Wall Street & DC Pennsylvania Ave), and direct phone/email support. | `3704e432d5ed47f186a874e71d834a03` |
-| `/book-a-consultation` | **Book a Consultation** | Multi-step interactive scheduling wizard: Practice Area selection, Live Calendar slot picker with timezone selection (EST/CST/MST/PST/GMT), Intake form with tax year selector, and instant confirmation receipt. | `4d3b00098c8d4b2286fab1de4ed54e94` |
 
 ---
 
@@ -153,7 +152,7 @@ vercel --prod
 ```
 
 ### 💡 Why `vercel.json` is Included
-In single-page React applications (SPAs) with client-side routing, navigating directly to deep URLs (e.g. `https://your-domain.vercel.app/book-a-consultation`) would result in a `404 Not Found` error without a rewrite rule. 
+In single-page React applications (SPAs) with client-side routing, navigating directly to deep URLs (e.g. `https://your-domain.vercel.app/contact-us`) would result in a `404 Not Found` error without a rewrite rule.
 
 The included `vercel.json` handles this automatically:
 ```json
