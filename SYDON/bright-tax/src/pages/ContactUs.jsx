@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import WhatsAppIcon from '../components/WhatsAppIcon'
 
 export default function ContactUs() {
   const [priority, setPriority] = useState('standard')
@@ -43,7 +44,7 @@ export default function ContactUs() {
             <div className="max-w-3xl flex flex-col gap-space-xs">
               <div className="inline-flex items-center gap-space-xs self-start px-space-sm py-1 rounded-full bg-surface-container-high text-secondary font-label-sm text-label-sm uppercase tracking-wider font-semibold shadow-sm text-xs">
                 <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
-                DIRECT CLIENT COMMUNICATIONS &amp; REGIONAL OFFICES
+                DIRECT CLIENT COMMUNICATIONS &amp; SAN FRANCISCO OFFICE
               </div>
               <h1 className="font-display-lg text-display-lg text-primary tracking-tight font-bold">
                 Get in Touch with Our Tax Advisory Team
@@ -344,7 +345,7 @@ export default function ContactUs() {
                     className="mt-1 w-4 h-4 rounded text-secondary focus:ring-secondary cursor-pointer"
                   />
                   <label htmlFor="compliance-consent" className="font-body-sm text-body-sm text-on-surface-variant leading-snug cursor-pointer select-none text-xs">
-                    I agree to encrypted communication per the Bright Tax Filings Privacy Policy and acknowledge that this initial submission is subject to federal Circular 230 disclosure regulations. Transmitted records remain strictly confidential under CPA-client privilege.
+                    I agree to encrypted communication per the Bright Tax Filing Privacy Policy and acknowledge that this initial submission is subject to federal Circular 230 disclosure regulations. Transmitted records remain strictly confidential under CPA-client privilege.
                   </label>
                 </div>
 
@@ -367,71 +368,54 @@ export default function ContactUs() {
             )}
           </div>
 
-          {/* Right Column: Regional Offices, Direct Lines, & Map Placard (5 Cols) */}
+          {/* Right Column: Office, Direct Lines, & Map Placard (5 Cols) */}
           <div className="lg:col-span-5 flex flex-col gap-space-md mt-8 lg:mt-0">
             <div className="bg-surface-card rounded-xl p-space-md shadow-md flex flex-col gap-space-md overflow-hidden border border-border-subtle">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="material-symbols-outlined text-secondary">pin_drop</span>
-                  <h3 className="font-title-md text-title-md text-primary font-bold">Office Locations</h3>
+                  <h3 className="font-title-md text-title-md text-primary font-bold">Office Location</h3>
                 </div>
                 <span className="font-label-sm text-label-sm text-irs-verified bg-surface-container px-2 py-0.5 rounded font-semibold uppercase text-xs">
-                  2 Major Hubs
+                  San Francisco
                 </span>
               </div>
 
-              {/* Office 1: New York */}
+              {/* San Francisco office */}
               <div className="bg-surface-canvas rounded-lg p-space-md flex flex-col gap-space-xs border border-border-subtle">
                 <div className="flex items-start justify-between">
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-secondary"></span>
-                      <h4 className="font-label-md text-label-md font-bold text-primary uppercase tracking-wide text-xs">US Headquarters (New York)</h4>
+                      <h4 className="font-label-md text-label-md font-bold text-primary uppercase tracking-wide text-xs">US Headquarters</h4>
                     </div>
                     <p className="font-body-md text-body-md text-on-surface mt-1 font-medium text-sm">
-                      14 Wall Street, 22nd Floor<br />New York, NY 10005
+                      580 California Street, Financial District<br />San Francisco, CA 94104, United States
                     </p>
                   </div>
-                  <span className="font-label-sm text-label-sm text-outline bg-surface-card px-2 py-1 rounded text-xs border border-border-subtle">Primary Registry</span>
+                  <span className="font-label-sm text-label-sm text-outline bg-surface-card px-2 py-1 rounded text-xs border border-border-subtle">Main Office</span>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 text-xs">
                   <div>
-                    <span className="text-outline block">Direct NY Line</span>
-                    <a className="font-mono-financial text-secondary hover:underline font-semibold" href="tel:12125550198">+1 (212) 555-0198</a>
+                    <span className="text-outline block">Call Us</span>
+                    <a className="font-mono-financial text-secondary hover:underline font-semibold" href="tel:+12135273378">+1 (213) 527-3378</a>
                   </div>
                   <div>
-                    <span className="text-outline block">National Toll-Free</span>
-                    <a className="font-mono-financial text-primary hover:text-secondary font-semibold" href="tel:18005552739">+1 (800) 555-APEX</a>
+                    <span className="text-outline block">WhatsApp</span>
+                    <a
+                      className="inline-flex items-center gap-1 font-mono-financial text-[#128C7E] hover:underline font-semibold"
+                      href="https://wa.me/916301999637"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Chat on WhatsApp at +91 63019 99637"
+                    >
+                      <WhatsAppIcon className="h-4 w-4" />
+                      <span>+91 63019 99637</span>
+                    </a>
                   </div>
                 </div>
                 <div className="pt-2 text-xs text-on-surface-variant">
-                  <strong>Hours:</strong> Mon - Fri: 8:00 AM - 8:00 PM EST
-                </div>
-              </div>
-
-              {/* Office 2: Washington DC */}
-              <div className="bg-surface-canvas rounded-lg p-space-md flex flex-col gap-space-xs border border-border-subtle">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-primary-container"></span>
-                      <h4 className="font-label-md text-label-md font-bold text-primary uppercase tracking-wide text-xs">Capital Office (Washington, DC)</h4>
-                    </div>
-                    <p className="font-body-md text-body-md text-on-surface mt-1 font-medium text-sm">
-                      1101 Pennsylvania Ave NW, 6th Floor<br />Washington, DC 20004
-                    </p>
-                  </div>
-                  <span className="font-label-sm text-label-sm text-outline bg-surface-card px-2 py-1 rounded text-xs border border-border-subtle">Regulatory Liaison</span>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 text-xs">
-                  <div>
-                    <span className="text-outline block">Direct DC Line</span>
-                    <a className="font-mono-financial text-secondary hover:underline font-semibold" href="tel:12025550144">+1 (202) 555-0144</a>
-                  </div>
-                  <div>
-                    <span className="text-outline block">Protocol</span>
-                    <span className="text-on-surface font-medium">By Prior Appointment Only</span>
-                  </div>
+                  <strong>Hours:</strong> Mon - Fri: 8:00 AM - 8:00 PM PST
                 </div>
               </div>
 
@@ -442,15 +426,9 @@ export default function ContactUs() {
                 </span>
                 <div className="flex flex-col gap-2 pt-1 text-xs">
                   <div className="flex items-center justify-between py-1 bg-surface-card px-3 rounded border border-border-subtle">
-                    <span className="text-on-surface font-medium">General Inquiries</span>
-                    <a className="font-mono-financial text-secondary hover:underline" href="mailto:inquiries@brighttaxfilings.com">
-                      inquiries@brighttaxfilings.com
-                    </a>
-                  </div>
-                  <div className="flex items-center justify-between py-1 bg-surface-card px-3 rounded border border-border-subtle">
-                    <span className="text-on-surface font-medium">Client Portal Support</span>
-                    <a className="font-mono-financial text-secondary hover:underline" href="mailto:portal@brighttaxfilings.com">
-                      portal@brighttaxfilings.com
+                    <span className="text-on-surface font-medium">Client Support</span>
+                    <a className="font-mono-financial text-secondary hover:underline" href="mailto:contact@brighttaxfiling.com">
+                      contact@brighttaxfiling.com
                     </a>
                   </div>
                 </div>

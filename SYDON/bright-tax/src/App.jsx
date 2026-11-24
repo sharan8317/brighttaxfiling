@@ -9,7 +9,7 @@ import IndividualTaxPreparation from './pages/IndividualTaxPreparation'
 import NonresidentTaxFiling from './pages/NonresidentTaxFiling'
 import BusinessTaxServices from './pages/BusinessTaxServices'
 import ContactUs from './pages/ContactUs'
-import BookConsultation from './pages/BookConsultation'
+import TaxCalculator from './pages/TaxCalculator'
 
 function Layout() {
   return (
@@ -36,7 +36,7 @@ export default function App() {
           <Route path="nonresident-tax-filing" element={<NonresidentTaxFiling />} />
           <Route path="business-tax-services" element={<BusinessTaxServices />} />
           <Route path="contact-us" element={<ContactUs />} />
-          <Route path="book-a-consultation" element={<BookConsultation />} />
+          <Route path="tax-calculator" element={<TaxCalculator />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>

@@ -39,7 +39,7 @@ export default function BusinessTaxServices() {
 
               <div className="flex flex-wrap items-center gap-space-md pt-space-sm">
                 <Link
-                  to="/book-a-consultation"
+                  to="/contact-us"
                   className="bg-secondary hover:bg-secondary-container text-on-secondary px-6 py-3.5 rounded-lg font-label-md text-label-md transition-all duration-200 shadow-md hover:shadow-lg inline-flex items-center gap-2 font-semibold"
                 >
                   <span>Discuss Your Business Taxes</span>
@@ -335,10 +335,10 @@ export default function BusinessTaxServices() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              to="/book-a-consultation"
+              to="/contact-us"
               className="bg-secondary hover:bg-secondary-container text-on-secondary px-8 py-3.5 rounded-lg font-semibold shadow-md transition-all inline-flex items-center gap-2"
             >
-              <span>Schedule Corporate Consultation</span>
+              <span>Contact Our Business Tax Team</span>
               <span className="material-symbols-outlined text-sm">calendar_today</span>
             </Link>
             <Link

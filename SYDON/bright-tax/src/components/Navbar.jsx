@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import WhatsAppIcon from './WhatsAppIcon'
 
 export default function Navbar() {
   const location = useLocation()
@@ -21,25 +22,35 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-surface-card/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-border-subtle">
-      <div className="h-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-space-md">
+      <div className="h-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-start gap-3">
         
         {/* Brand Logo */}
-        <Link to="/" className="flex items-center gap-3 flex-shrink-0 group">
-          <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white shadow-sm group-hover:bg-primary-container transition-colors">
-            <span className="material-symbols-outlined text-2xl text-secondary-fixed">account_balance</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="font-title-md text-title-md text-primary tracking-tight font-bold group-hover:text-secondary transition-colors">
-              Bright Tax Filings
+        <Link
+          to="/"
+          className="flex flex-shrink-0 items-center gap-2.5 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2"
+          aria-label="Bright Tax Filing home"
+        >
+          <span className="relative block h-12 w-14 flex-shrink-0 overflow-hidden" aria-hidden="true">
+            <img
+              src="/images/bright-tax-filing-logo.png"
+              alt=""
+              className="max-w-none -translate-x-[23px] object-contain"
+              width="102"
+              height="68"
+            />
+          </span>
+          <span className="flex flex-col leading-none">
+            <span className="whitespace-nowrap font-display text-[17px] font-bold tracking-tight text-primary sm:text-xl">
+              Bright Tax <span className="text-sky-400">Filing</span>
             </span>
-            <span className="font-label-sm text-label-sm text-outline tracking-wider uppercase text-[10px]">
-              ApexTax Consulting &amp; Advisory
+            <span className="mt-1 hidden whitespace-nowrap text-[8px] font-semibold uppercase tracking-[0.18em] text-tax-warning min-[430px]:block">
+              Clarity in every calculation
             </span>
-          </div>
+          </span>
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-space-lg">
+        <nav className="hidden lg:flex items-center gap-space-lg lg:ml-12 xl:ml-20">
           <Link
             to="/"
             className={`font-label-md text-label-md py-2 transition-colors ${
@@ -49,17 +60,6 @@ export default function Navbar() {
             }`}
           >
             Home
-          </Link>
-
-          <Link
-            to="/about-us"
-            className={`font-label-md text-label-md py-2 transition-colors ${
-              isActive('/about-us')
-                ? 'text-secondary font-bold'
-                : 'text-on-surface-variant hover:text-on-surface'
-            }`}
-          >
-            About Us
           </Link>
 
           {/* Services Dropdown */}
@@ -141,7 +141,7 @@ export default function Navbar() {
                 </span>
 
                 <Link
-                  to="/book-a-consultation"
+                  to="/contact-us"
                   className="p-space-xs rounded-lg hover:bg-surface-container-low transition-colors block"
                 >
                   <div className="font-label-md text-label-md text-on-surface font-semibold">Tax Planning</div>
@@ -184,6 +184,28 @@ export default function Navbar() {
           </div>
 
           <Link
+            to="/tax-calculator"
+            className={`font-label-md text-label-md py-2 transition-colors ${
+              isActive('/tax-calculator')
+                ? 'text-secondary font-bold'
+                : 'text-on-surface-variant hover:text-on-surface'
+            }`}
+          >
+            Tax Calculator
+          </Link>
+
+          <Link
+            to="/about-us"
+            className={`font-label-md text-label-md py-2 transition-colors ${
+              isActive('/about-us')
+                ? 'text-secondary font-bold'
+                : 'text-on-surface-variant hover:text-on-surface'
+            }`}
+          >
+            About Us
+          </Link>
+
+          <Link
             to="/contact-us"
             className={`font-label-md text-label-md py-2 transition-colors ${
               isActive('/contact-us')
@@ -196,34 +218,31 @@ export default function Navbar() {
         </nav>
 
         {/* Right CTA & Phone */}
-        <div className="hidden sm:flex items-center gap-space-md">
+        <div className="hidden sm:flex items-center gap-space-md ml-auto">
           <div className="hidden xl:flex flex-col text-right">
             <span className="font-label-sm text-label-sm text-outline text-xs">Direct Client Line</span>
             <a
-              href="tel:18005552739"
+              href="tel:+12135273378"
               className="font-mono-financial text-mono-financial text-primary hover:text-secondary transition-colors font-semibold"
             >
-              +1 (800) 555-APEX
+              +1 (213) 527-3378
             </a>
           </div>
 
-          <Link
-            to="/book-a-consultation"
-            className="bg-secondary hover:bg-secondary-container text-on-secondary px-5 py-2.5 rounded-lg font-label-md text-label-md font-semibold transition-all duration-150 shadow-sm hover:shadow-md inline-flex items-center gap-2"
+          <a
+            href="https://wa.me/916301999637"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden h-10 w-10 xl:inline-flex items-center justify-center rounded-full bg-[#25D366] text-white transition-colors hover:bg-[#1fa855] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2"
+            aria-label="Chat on WhatsApp at +91 63019 99637"
           >
-            <span>Book a Consultation</span>
-            <span className="material-symbols-outlined text-sm">calendar_today</span>
-          </Link>
+            <WhatsAppIcon />
+          </a>
+
         </div>
 
         {/* Mobile Hamburger Button */}
-        <div className="flex lg:hidden items-center gap-2">
-          <Link
-            to="/book-a-consultation"
-            className="bg-secondary text-on-secondary px-3 py-1.5 rounded-lg text-xs font-semibold sm:hidden"
-          >
-            Book
-          </Link>
+        <div className="flex lg:hidden items-center gap-2 ml-auto">
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -248,16 +267,6 @@ export default function Navbar() {
             }`}
           >
             Home
-          </Link>
-
-          <Link
-            to="/about-us"
-            onClick={() => setMobileMenuOpen(false)}
-            className={`px-3 py-2 rounded-lg font-label-md text-label-md ${
-              isActive('/about-us') ? 'bg-secondary/10 text-secondary font-bold' : 'text-primary'
-            }`}
-          >
-            About Us
           </Link>
 
           <div>
@@ -295,7 +304,7 @@ export default function Navbar() {
                   Business Tax Services (1120/1065)
                 </Link>
                 <Link
-                  to="/book-a-consultation"
+                  to="/contact-us"
                   onClick={() => setMobileMenuOpen(false)}
                   className="py-1.5 px-2 rounded text-primary hover:text-secondary font-medium"
                 >
@@ -313,6 +322,26 @@ export default function Navbar() {
           </div>
 
           <Link
+            to="/tax-calculator"
+            onClick={() => setMobileMenuOpen(false)}
+            className={`px-3 py-2 rounded-lg font-label-md text-label-md ${
+              isActive('/tax-calculator') ? 'bg-secondary/10 text-secondary font-bold' : 'text-primary'
+            }`}
+          >
+            Tax Calculator
+          </Link>
+
+          <Link
+            to="/about-us"
+            onClick={() => setMobileMenuOpen(false)}
+            className={`px-3 py-2 rounded-lg font-label-md text-label-md ${
+              isActive('/about-us') ? 'bg-secondary/10 text-secondary font-bold' : 'text-primary'
+            }`}
+          >
+            About Us
+          </Link>
+
+          <Link
             to="/contact-us"
             onClick={() => setMobileMenuOpen(false)}
             className={`px-3 py-2 rounded-lg font-label-md text-label-md ${
@@ -323,20 +352,22 @@ export default function Navbar() {
           </Link>
 
           <div className="pt-2 border-t border-border-subtle flex flex-col gap-2">
-            <Link
-              to="/book-a-consultation"
-              onClick={() => setMobileMenuOpen(false)}
-              className="bg-secondary text-on-secondary px-4 py-3 rounded-lg text-center font-semibold flex items-center justify-center gap-2 shadow"
-            >
-              <span>Book a Consultation</span>
-              <span className="material-symbols-outlined text-sm">calendar_today</span>
-            </Link>
             <a
-              href="tel:18005552739"
+              href="tel:+12135273378"
               className="px-4 py-2 text-center text-sm font-mono-financial text-outline flex items-center justify-center gap-1.5"
             >
               <span className="material-symbols-outlined text-xs">phone</span>
-              <span>+1 (800) 555-APEX</span>
+              <span>+1 (213) 527-3378</span>
+            </a>
+            <a
+              href="https://wa.me/916301999637"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mx-3 inline-flex items-center justify-center gap-2 rounded-lg bg-[#25D366] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1fa855]"
+              aria-label="Chat on WhatsApp at +91 63019 99637"
+            >
+              <WhatsAppIcon />
+              <span>WhatsApp: +91 63019 99637</span>
             </a>
           </div>
         </div>

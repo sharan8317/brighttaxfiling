@@ -77,7 +77,7 @@ export default function AboutUs() {
               </h2>
               <div className="space-y-space-md font-body-md text-body-md text-on-surface-variant leading-relaxed">
                 <p>
-                  Bright Tax Filings was established with an unambiguous premise: standard tax preparation had grown detached, opaque, and unnecessarily stressful for clients navigating an increasingly intricate statutory climate.
+                  Bright Tax Filing was established with an unambiguous premise: standard tax preparation had grown detached, opaque, and unnecessarily stressful for clients navigating an increasingly intricate statutory climate.
                 </p>
                 <p>
                   We assembled a multidisciplinary bench of Certified Public Accountants, IRS Enrolled Agents, and international tax attorneys committed to proactive stewardship. Rather than treating taxes as an annual administrative sprint, we architect durable tax positions that honor statutory accuracy while uncovering lawful planning opportunities.
@@ -386,10 +386,10 @@ export default function AboutUs() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              to="/book-a-consultation"
+              to="/contact-us"
               className="bg-secondary hover:bg-secondary-container text-on-secondary px-8 py-3.5 rounded-lg font-semibold shadow-md transition-all inline-flex items-center gap-2"
             >
-              <span>Schedule Strategy Call</span>
+              <span>Contact Our Team</span>
               <span className="material-symbols-outlined text-sm">calendar_today</span>
             </Link>
             <Link

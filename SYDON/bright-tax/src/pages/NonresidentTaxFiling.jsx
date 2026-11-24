@@ -47,7 +47,7 @@ export default function NonresidentTaxFiling() {
 
               <div className="flex flex-wrap items-center gap-space-md pt-space-xs">
                 <Link
-                  to="/book-a-consultation"
+                  to="/contact-us"
                   className="bg-secondary hover:bg-secondary-container text-on-secondary px-space-lg py-3 rounded-lg font-label-md text-label-md transition-all shadow-md inline-flex items-center gap-2 font-semibold"
                 >
                   <span>Get Nonresident Tax Assistance</span>
@@ -393,7 +393,7 @@ export default function NonresidentTaxFiling() {
                 Obtain an ITIN Without Mailing Your Original Passport
               </h3>
               <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                As an authorized IRS CAA, Bright Tax Filings verifies your identity documents in person or via approved secure video protocols. We issue a formal Certificate of Accuracy (Form W-7 COA), eliminating the risk of losing original passports in government mail.
+                As an authorized IRS CAA, Bright Tax Filing verifies your identity documents in person or via approved secure video protocols. We issue a formal Certificate of Accuracy (Form W-7 COA), eliminating the risk of losing original passports in government mail.
               </p>
               <div className="flex flex-wrap gap-4 pt-2">
                 <div className="flex items-center gap-2 text-sm text-primary font-medium">
@@ -413,7 +413,7 @@ export default function NonresidentTaxFiling() {
 
             <div className="lg:col-span-4 text-center lg:text-right mt-6 lg:mt-0">
               <Link
-                to="/book-a-consultation"
+                to="/contact-us"
                 className="bg-secondary hover:bg-secondary-container text-on-secondary px-8 py-4 rounded-lg font-semibold shadow-md inline-flex items-center gap-2"
               >
                 <span>Schedule CAA Verification</span>
@@ -435,10 +435,10 @@ export default function NonresidentTaxFiling() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              to="/book-a-consultation"
+              to="/contact-us"
               className="bg-secondary hover:bg-secondary-container text-on-secondary px-8 py-3.5 rounded-lg font-semibold shadow-md transition-all inline-flex items-center gap-2"
             >
-              <span>Book Nonresident Consultation</span>
+              <span>Contact a Nonresident Tax Specialist</span>
               <span className="material-symbols-outlined text-sm">calendar_today</span>
             </Link>
             <Link
